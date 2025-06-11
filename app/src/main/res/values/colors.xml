@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores suaves para os botões -->
+    <color name="light_green">#A9D8B8</color>
+    <color name="light_yellow">#FFF3A3</color>
+    <color name="light_blue">#A8D8EA</color>
+
+    <color name="light_green_start">#A9D8B8</color>
+    <color name="light_green_end">#87C099</color>
+
+    <color name="light_yellow_start">#FFF3A3</color>
+    <color name="light_yellow_end">#FDEB71</color>
+
+    <color name="light_blue_start">#A8D8EA</color>
+    <color name="light_blue_end">#86B9D6</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

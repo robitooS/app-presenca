@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "345011542408",
+    "project_id": "app-presenca-ce1fc",
+    "storage_bucket": "app-presenca-ce1fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345011542408:android:902d5a1f10d57424c2823d",
+        "android_client_info": {
+          "package_name": "com.example.presenteapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMvWdWfmniEK3Hqh6EKiJAnQAe5-0GN88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

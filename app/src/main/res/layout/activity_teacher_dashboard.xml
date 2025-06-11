@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#010101"
+    android:padding="24dp"
+    tools:context=".activities.activity_teacher_dashboard">
+
+    <TextView
+        android:id="@+id/dashboardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="Painel do Professor"
+        android:textColor="#FFFFFF"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botão "Criar QR Code" com o novo estilo verde claro -->
+    <Button
+        android:id="@+id/createQrButton"
+        android:background="@color/light_green"
+        style="@style/LightGreenButton"
+        android:layout_marginTop="48dp"
+        android:text="Criar QR Code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboardTitle" />
+
+    <!-- Botão "Relatório de Faltas" com o novo estilo amarelo claro -->
+    <Button
+        android:id="@+id/attendanceReportButton"
+        style="@style/LightYellowButton"
+        android:layout_marginTop="16dp"
+        android:text="Relatório de Faltas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createQrButton" />
+
+    <!-- Botão "Aprovar Alunos Pendentes" com o novo estilo azul claro -->
+    <Button
+        android:id="@+id/approveStudentsButton"
+        style="@style/LightBlueButton"
+        android:layout_marginTop="16dp"
+        android:text="Aprovar Alunos Pendentes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/attendanceReportButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
