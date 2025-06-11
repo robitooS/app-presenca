@@ -41,6 +41,7 @@ class PendingStudentsAdapter(
             binding.studentNameTextView.text = student.nome
             binding.studentEmailTextView.text = student.email
 
+
             binding.approveButton.setOnClickListener {
                 listener.onApproveClick(student, adapterPosition)
             }
