@@ -13,6 +13,9 @@ import com.example.presenteapp.network.model.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
+// ESTA É A VERSÃO CORRETA E SEGURA DO ARQUIVO.
+// ELA NÃO CORRIGE O PROBLEMA DO BACKEND, MAS IMPEDE QUE O APP TRAVE.
+// A PRÓXIMA ETAPA OBRIGATÓRIA É CORRIGIR SEU CÓDIGO JAVA NO SERVIDOR.
 class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.OnActionClickListener {
 
     private lateinit var binding: ActivityPendingTeachersBinding
@@ -48,7 +51,6 @@ class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.On
             val token = "Bearer ${result.token}"
             lifecycleScope.launch {
                 try {
-                    // O parâmetro "role" não é mais necessário aqui
                     val response = RetrofitInstance.api.getPendingProf(token)
                     binding.progressBar.visibility = View.GONE
 
@@ -73,13 +75,11 @@ class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.On
         }
     }
 
-
-    // --- MÉTODOS DE AÇÃO CORRIGIDOS ---
-
     override fun onApproveClick(userProfile: UserProfile, position: Int) {
-        // Assumindo que seu UserProfile agora tem o campo 'firebaseUid' do tipo String
+        // VERSÃO CORRIGIDA: A verificação de nulo foi restaurada.
+        // Se o firebaseUid for nulo, mostra o Toast e para a função, evitando o crash.
         val professorUid = userProfile.firebaseUid ?: run {
-            Toast.makeText(this, "Erro: UID do professor não encontrado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Erro: UID do professor não encontrado na resposta da API.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -88,7 +88,6 @@ class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.On
             val token = "Bearer ${result.token}"
             lifecycleScope.launch {
                 try {
-                    // ALTERADO: Chamando o novo método com o UID
                     val response = RetrofitInstance.api.approveProfessor(token, professorUid)
                     if (response.isSuccessful) {
                         Toast.makeText(this@activity_pending_teachers, "Professor aprovado!", Toast.LENGTH_SHORT).show()
@@ -107,9 +106,9 @@ class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.On
     }
 
     override fun onRejectClick(userProfile: UserProfile, position: Int) {
-        // Assumindo que seu UserProfile agora tem o campo 'firebaseUid' do tipo String
+        // VERSÃO CORRIGIDA: A verificação de nulo foi restaurada aqui também.
         val professorUid = userProfile.firebaseUid ?: run {
-            Toast.makeText(this, "Erro: UID do professor não encontrado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Erro: UID do professor não encontrado na resposta da API.", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -118,7 +117,6 @@ class activity_pending_teachers : AppCompatActivity(), PendingTeachersAdapter.On
             val token = "Bearer ${result.token}"
             lifecycleScope.launch {
                 try {
-                    // ALTERADO: Chamando o novo método com o UID
                     val response = RetrofitInstance.api.rejectProfessor(token, professorUid)
                     if (response.isSuccessful) {
                         Toast.makeText(this@activity_pending_teachers, "Professor rejeitado!", Toast.LENGTH_SHORT).show()

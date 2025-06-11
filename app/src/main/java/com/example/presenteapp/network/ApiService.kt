@@ -32,7 +32,7 @@ interface ApiService {
     @POST("api/admin/professores/{uid}/aprovar")
     suspend fun approveProfessor(
         @Header("Authorization") token: String,
-        @Path("uid") firebaseUid: String // <-- DEVE SER String
+        @Path("uid") firebaseUid: String
     ): Response<UserProfile>
 
     @DELETE("api/admin/professores/{uid}")
@@ -40,6 +40,9 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("uid") firebaseUid: String // <-- DEVE SER String
     ): Response<UserProfile>
+
+    @GET("api/professores/ativos")
+    suspend fun getProfessoresAtivos(): Response<List<UserProfile>>
 
 
 }
