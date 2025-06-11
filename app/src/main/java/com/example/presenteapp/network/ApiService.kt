@@ -42,7 +42,9 @@ interface ApiService {
     ): Response<UserProfile>
 
     @GET("api/professores/ativos")
-    suspend fun getProfessoresAtivos(): Response<List<UserProfile>>
+    suspend fun getProfessoresAtivos(
+        @Header("Authorization") token: String // <-- ADICIONE ESTA LINHA
+    ): Response<List<UserProfile>>
 
 
 }

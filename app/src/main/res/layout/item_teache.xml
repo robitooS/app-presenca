@@ -14,6 +14,19 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+
+        <ImageButton
+            android:id="@+id/removeTeacherButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Remover Professor"
+            android:src="@android:drawable/ic_menu_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#E57373" />
+
         <TextView
             android:id="@+id/teacherNameTextView"
             android:layout_width="0dp"

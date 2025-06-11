@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class UserProfile(
     // GARANTA QUE ESTE CAMPO EXISTE. ELE RECEBERÁ O ID DO BANCO DE DADOS.
     val id: Long,
-    val firebaseUid: String,
+    val firebaseUid: String?,
     val nome: String,
     val email: String,
 
