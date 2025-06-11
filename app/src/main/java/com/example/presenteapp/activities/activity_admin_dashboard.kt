@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog // Importação necessária para o alerta
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,7 +19,6 @@ import com.example.presenteapp.network.model.UserProfile
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
-// 1. FAÇA A ACTIVITY IMPLEMENTAR A INTERFACE DO ADAPTER
 class activity_admin_dashboard : AppCompatActivity(), ActiveTeachersAdapter.OnTeacherRemoveClickListener {
 
     private lateinit var binding: ActivityAdminDashboardBinding
@@ -49,7 +48,6 @@ class activity_admin_dashboard : AppCompatActivity(), ActiveTeachersAdapter.OnTe
     }
 
     private fun setupRecyclerView() {
-        // 2. PASSE A ACTIVITY (this) COMO O LISTENER AO CRIAR O ADAPTER
         activeTeachersAdapter = ActiveTeachersAdapter(activeTeachersList, this)
         binding.teachersRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.teachersRecyclerView.adapter = activeTeachersAdapter
@@ -64,13 +62,13 @@ class activity_admin_dashboard : AppCompatActivity(), ActiveTeachersAdapter.OnTe
 
                     if (response.isSuccessful) {
                         val teachers = response.body()
-                        activeTeachersList.clear() // Limpa a lista antes de adicionar novos itens
+                        activeTeachersList.clear()
                         if (!teachers.isNullOrEmpty()) {
                             activeTeachersList.addAll(teachers)
                         } else {
                             Toast.makeText(this@activity_admin_dashboard, "Nenhum professor ativo encontrado.", Toast.LENGTH_SHORT).show()
                         }
-                        activeTeachersAdapter.notifyDataSetChanged() // Notifica o adapter fora do if/else
+                        activeTeachersAdapter.notifyDataSetChanged()
                     } else {
                         Log.e("AdminDashboard", "Erro ao buscar professores ativos: ${response.code()} - ${response.message()}")
                         Toast.makeText(this@activity_admin_dashboard, "Falha ao carregar lista. Código: ${response.code()}", Toast.LENGTH_SHORT).show()
@@ -87,23 +85,16 @@ class activity_admin_dashboard : AppCompatActivity(), ActiveTeachersAdapter.OnTe
         }
     }
 
-    // 3. ADICIONE AS FUNÇÕES PARA LIDAR COM A REMOÇÃO
     override fun onRemoveClick(userProfile: UserProfile, position: Int) {
-        // ---- INÍCIO DA VERIFICAÇÃO DE SEGURANÇA ----
         val uid = userProfile.firebaseUid
         if (uid == null) {
-            // Se o ID for nulo, mostramos um aviso e impedimos a ação.
             Toast.makeText(this, "ERRO: Não foi possível remover, pois o ID do professor não foi encontrado.", Toast.LENGTH_LONG).show()
-            return // Impede que o resto do código seja executado
+            return
         }
-        // ---- FIM DA VERIFICAÇÃO DE SEGURANÇA ----
-
-        // Se o ID existir, o código continua normalmente.
         AlertDialog.Builder(this)
             .setTitle("Confirmar Remoção")
             .setMessage("Tem certeza de que deseja remover o professor '${userProfile.nome}'?\n\nEsta ação não pode ser desfeita.")
             .setPositiveButton("Remover") { _, _ ->
-                // Chamamos a função com o ID que já sabemos que não é nulo.
                 removeTeacher(uid, position)
             }
             .setNegativeButton("Cancelar", null)

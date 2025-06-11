@@ -1,4 +1,4 @@
-// 1. O PACOTE ESTÁ CORRETO CONFORME SEU ARQUIVO
+
 package com.example.presenteapp.activities
 
 import android.content.Intent
@@ -53,9 +53,8 @@ class MainActivity : AppCompatActivity() {
         currentUser?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
             if (tokenTask.isSuccessful) {
                 val idToken = tokenTask.result?.token
-                val firebaseUid = currentUser.uid // <-- PEGUE O UID AQUI
+                val firebaseUid = currentUser.uid
                 if (idToken != null) {
-                    // E PASSE O UID NA CHAMADA
                     fetchUserProfile("Bearer $idToken", firebaseUid)
                 } else {
                     onLoginFailure("Não foi possível obter o token de autenticação.")
@@ -73,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = task.result.user // Pegue o objeto User
+                    val user = task.result.user
                     user?.getIdToken(true)?.addOnCompleteListener { tokenTask ->
                         if (tokenTask.isSuccessful) {
                             val idToken = tokenTask.result?.token
@@ -125,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Se o status NÃO for "PENDENTE", a lógica continua como antes.
-        val intent = when (userProfile.role.uppercase()) { // Use uppercase() para garantir
+        val intent = when (userProfile.role.uppercase()) {
             "PROFESSOR" -> Intent(this, activity_teacher_dashboard::class.java)
             "ALUNO" -> Intent(this, activity_qr_scanner::class.java)
             "ADMIN_MASTER" -> Intent(this, activity_admin_dashboard::class.java)

@@ -25,7 +25,6 @@ class activity_pending_students : AppCompatActivity(), PendingStudentsAdapter.On
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // O nome do binding é derivado do nome do layout: activity_pending_students.xml -> ActivityPendingStudentsBinding
         binding = ActivityPendingStudentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -133,6 +132,6 @@ class activity_pending_students : AppCompatActivity(), PendingStudentsAdapter.On
     private fun handleApiError(message: String) {
         binding.progressBar.visibility = View.GONE
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        Log.e("activity_pending_students", message) // Log tag corrigida
+        Log.e("activity_pending_students", message)
     }
 }

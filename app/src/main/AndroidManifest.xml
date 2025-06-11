@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activities.DisplayQrCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.activity_display_qrcode"
+            android:exported="false" />
+        <activity
             android:name=".activities.activity_pending_students"
             android:exported="false" />
         <activity

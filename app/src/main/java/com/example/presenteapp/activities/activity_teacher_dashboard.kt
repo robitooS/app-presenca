@@ -19,12 +19,13 @@ class activity_teacher_dashboard : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         setupButtons()
-        setupLogoutButton() // NOVA CHAMADA DE FUNÇÃO
+        setupLogoutButton()
     }
 
     private fun setupButtons() {
         binding.createQrButton.setOnClickListener {
-            Toast.makeText(this, "Funcionalidade de criar QR Code em breve!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DisplayQrCodeActivity::class.java)
+            startActivity(intent)
         }
 
         binding.attendanceReportButton.setOnClickListener {
@@ -37,14 +38,12 @@ class activity_teacher_dashboard : AppCompatActivity() {
         }
     }
 
-    // NOVA FUNÇÃO PARA CONFIGURAR O BOTÃO DE LOGOUT
     private fun setupLogoutButton() {
         binding.logoutButton.setOnClickListener {
             signOut()
         }
     }
 
-    // NOVA FUNÇÃO PARA REALIZAR O LOGOUT
     private fun signOut() {
         auth.signOut()
         val intent = Intent(this, MainActivity::class.java).apply {

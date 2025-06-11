@@ -1,5 +1,7 @@
 package com.example.presenteapp.network
 
+import com.example.presenteapp.network.model.AttendanceRequest
+import com.example.presenteapp.network.model.SessionResponse
 import com.example.presenteapp.network.model.StatusUpdateRequest
 import com.example.presenteapp.network.model.UserProfile
 import com.example.presenteapp.network.model.UserRegistration
@@ -68,5 +70,18 @@ interface ApiService {
         @Path("uid") firebaseUid: String
     ): Response<UserProfile>
 
+
+    // --- ENDPOINT PARA O PROFESSOR CRIAR A SESSÃO ---
+    @POST("api/sessions/create")
+    suspend fun createClassSession(
+        @Header("Authorization") token: String
+    ): Response<SessionResponse> // Espera receber um SessionResponse
+
+    // --- ENDPOINT PARA O ALUNO REGISTRAR PRESENÇA ---
+    @POST("api/attendance/register")
+    suspend fun registerAttendance(
+        @Header("Authorization") token: String,
+        @Body attendanceRequest: AttendanceRequest
+    ): Response<Void>
 
 }

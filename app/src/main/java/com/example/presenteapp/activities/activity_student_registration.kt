@@ -75,7 +75,6 @@ class activity_student_registration : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
-                // MODIFICAÇÃO AQUI: Usando o novo endpoint 'registerStudent'
                 val response = RetrofitInstance.api.registerStudent(studentData)
                 if (response.isSuccessful) {
                     Toast.makeText(this@activity_student_registration, "Cadastro realizado! Aguardando aprovação do professor.", Toast.LENGTH_LONG).show()

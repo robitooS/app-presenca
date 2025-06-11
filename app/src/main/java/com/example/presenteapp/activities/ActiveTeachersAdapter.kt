@@ -8,11 +8,10 @@ import com.example.presenteapp.databinding.ItemTeacheBinding
 import com.example.presenteapp.network.model.UserProfile
 
 class ActiveTeachersAdapter(
-    private var teachers: MutableList<UserProfile>, // Mude de List para MutableList
-    private val listener: OnTeacherRemoveClickListener // Adicione o listener
+    private var teachers: MutableList<UserProfile>,
+    private val listener: OnTeacherRemoveClickListener
 ) : RecyclerView.Adapter<ActiveTeachersAdapter.ActiveTeacherViewHolder>() {
 
-    // 1. Interface para comunicar o clique para a Activity
     interface OnTeacherRemoveClickListener {
         fun onRemoveClick(userProfile: UserProfile, position: Int)
     }
@@ -22,7 +21,6 @@ class ActiveTeachersAdapter(
             binding.teacherNameTextView.text = teacher.nome
             binding.teacherEmailTextView.text = teacher.email
 
-            // 2. Configure o clique no botão de remover
             binding.removeTeacherButton.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -32,12 +30,11 @@ class ActiveTeachersAdapter(
         }
     }
 
-    // 3. Adicione uma função para remover o item da lista (e da UI)
     fun removeItem(position: Int) {
         if (position >= 0 && position < teachers.size) {
             teachers.removeAt(position)
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position, teachers.size) // Atualiza as posições dos itens restantes
+            notifyItemRangeChanged(position, teachers.size)
         }
     }
 

@@ -1,4 +1,3 @@
-// Em: app/src/main/java/com/example/presenteapp/network/model/UserRegistration.kt
 package com.example.presenteapp.network.model
 
 data class UserRegistration(
