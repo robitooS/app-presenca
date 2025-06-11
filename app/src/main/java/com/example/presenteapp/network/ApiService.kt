@@ -46,5 +46,27 @@ interface ApiService {
         @Header("Authorization") token: String // <-- ADICIONE ESTA LINHA
     ): Response<List<UserProfile>>
 
+    // --- NOVOS ENDPOINTS PARA ALUNOS ---
+
+    @POST("api/students/create") // Endpoint específico para alunos
+    suspend fun registerStudent(@Body studentData: UserRegistration): Response<Void>
+
+    @GET("api/professores/alunos/pendentes")
+    suspend fun getPendingStudents(
+        @Header("Authorization") token: String
+    ): Response<List<UserProfile>>
+
+    @POST("api/professores/alunos/{uid}/aprovar")
+    suspend fun approveStudent(
+        @Header("Authorization") token: String,
+        @Path("uid") firebaseUid: String
+    ): Response<UserProfile>
+
+    @DELETE("api/professores/alunos/{uid}/excluir")
+    suspend fun rejectStudent(
+        @Header("Authorization") token: String,
+        @Path("uid") firebaseUid: String
+    ): Response<UserProfile>
+
 
 }
