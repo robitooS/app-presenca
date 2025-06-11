@@ -19,6 +19,7 @@ class activity_teacher_dashboard : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         setupButtons()
+        setupLogoutButton() // NOVA CHAMADA DE FUNÇÃO
     }
 
     private fun setupButtons() {
@@ -30,10 +31,26 @@ class activity_teacher_dashboard : AppCompatActivity() {
             Toast.makeText(this, "Relatórios de falta em breve!", Toast.LENGTH_SHORT).show()
         }
 
-        // MODIFICAÇÃO AQUI: Usando o nome de classe correto 'activity_pending_students'
         binding.approveStudentsButton.setOnClickListener {
             val intent = Intent(this, activity_pending_students::class.java)
             startActivity(intent)
         }
+    }
+
+    // NOVA FUNÇÃO PARA CONFIGURAR O BOTÃO DE LOGOUT
+    private fun setupLogoutButton() {
+        binding.logoutButton.setOnClickListener {
+            signOut()
+        }
+    }
+
+    // NOVA FUNÇÃO PARA REALIZAR O LOGOUT
+    private fun signOut() {
+        auth.signOut()
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
+        finish()
     }
 }
